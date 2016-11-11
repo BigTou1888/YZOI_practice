@@ -1,0 +1,95 @@
+##############################
+statement:
+##############################
+&&&&&&&&&&&&&&&&&&&
+tcl:
+if {$i==0} {
+}
+elseif {$i==1} {
+}
+else {
+}
+
+&&&&&&&&&&&&&&&&&&&
+python:
+if i==0 :
+elif i==1 :
+else:
+
+&&&&&&&&&&&&&&&&&&&
+perl:
+if  ($i==0) {
+}
+elsif ($i==1) {
+}
+else {
+}
+
+&&&&&&&&&&&&&&&&&&&
+c/c++/java:
+if (i==0) {
+}
+else if (i==1) {
+}
+else {
+}
+
+
+##############################
+loop:
+##############################
+&&&&&&&&&&&&&&&&&&&
+tcl: 
+while {$i>0} {
+  set i [expr $i - 1]
+}
+for {set i 1} {$i < 5} {incr i} {
+
+}
+break
+continue
+&&&&&&&&&&&&&&&&&&&
+python:
+for i in range(0,5): 
+# 0,1,2,3,4
+
+li = [0,1,2,3,4,5]
+for i in li:
+# 0,1,2,3,4,5
+
+n=0
+while n<5:
+  n = n + 1
+# 0,1,2,3,4
+
+break
+continue
+
+&&&&&&&&&&&&&&&&&&&
+perl:
+for (my $i = 0; $i < 5; $i++) {
+}
+
+while ($i < 5) {
+}
+
+@list(0,1,2,3,4,5)
+foreach $a (@list) {
+}
+
+foreach my $key (keys %hash_list) {
+}
+
+last
+next
+
+&&&&&&&&&&&&&&&&&&&
+c/c++/java:
+for ( int x=9; x<5; x++) {
+}
+
+while ( x<5) {
+}
+
+break
+continue
