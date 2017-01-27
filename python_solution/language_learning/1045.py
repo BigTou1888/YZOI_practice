@@ -1,17 +1,25 @@
-c = int( input())
+t = int( input())
 
 i = 0
+status = []
+while i < t:
+    s = int(input())
+    n = 0
+    p = 1
+    while p<(s/2):
+        if s%p == 0:
+            n = n+p
+        p = p+1
+    if n==p:
+        status.append("Perfect Number")
+    elif n<p:
+        status.append("Insufficient Number")
+    else:
+        status.append("Excess Number")
 
-total = 0
-while i < c:
-    li = []
-    li = input().split()
-    p = int(li[0])
-    d = int(li[1])
-    if d != 10:
-        total = d*p/10 +total
     i = i+1
             
-        
-print("%.2f" % total)
-
+i = 0
+while i < t:
+    print(status[i])
+    i=i+1
