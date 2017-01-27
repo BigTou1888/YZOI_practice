@@ -1,31 +1,27 @@
 
-door = []
-i = 0
-cnt = 100
-while i < cnt:
-    door.append(0)
-    i = i+1
-w = 1
-while w < (cnt+1):
-    d = 0
-    while d < cnt:
-        if (d+1)%w ==0:
-            if door[d] == 0:
-                door[d] = 1
-            else:
-                door[d] = 0
-        d = d+1
-    w = w+1
-
-            
-d = 0
-while d < cnt-1:
-    if door[d] == 1:
-        print (d+1, end=" ")
-    d = d+1
-
-if door[99] == 1:
-    print (100)
-
     
+t = 1
+
+total = 0
+
+while t < 100:
+    f = 1
+    tw = 1
+    o = 1
+    rem_10 = 1000-t*10
+    while f < rem_10/5:
+        rem_5 = 1000-t*10-f*5
+        #2tw+o = rem_5
+        #tw+o = 400-f-t
+        #tw=rem_5+f+t-400
+        #o=800-rem_5-2f-2t      
+        if (rem_5 + f+t-400 >0) & (800-rem_5-2*f-2*t>0):
+            total = total + 1
+        f = f+1
+    t = t+1
+
+print(total)
+            
+        
+
 
