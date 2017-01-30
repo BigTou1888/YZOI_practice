@@ -1,9 +1,9 @@
-
+import math
 def SumOfDivisors(num):
     i=1
-    test_num = num
+    test_num = math.sqrt(num)
     sum=0
-    while i < test_num/2+1:
+    while i <= test_num:
         if num%i == 0:
             sum = sum+i
             if (num/i != i) & (num/i !=num):
@@ -19,7 +19,7 @@ while index <= 100000:
     a=index
     a_sum = SumOfDivisors(a)
  #   print("a =", a, "a_sum =", a_sum)
-    if (a_sum>a) & (a_sum<=100000):
+    if (a_sum!=a) & (a_sum<=100000):
         b = a_sum
         b_sum = SumOfDivisors(b)
         if b_sum == a:
