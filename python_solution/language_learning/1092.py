@@ -1,7 +1,7 @@
 
 def printLine(line_num, entry_num):
     i = 0
-    start = 1
+    start = entry_num-line_num
     while i < entry_num:
         
         if i == (entry_num-1):
@@ -9,7 +9,7 @@ def printLine(line_num, entry_num):
         else:
             print("%3d" % start, end='')
         
-        if start != (line_num+1):
+        if i >= entry_num - line_num -1:
             start = start + 1
 
         i = i+1
