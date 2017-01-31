@@ -24,10 +24,10 @@ max_y = 0
 x=0
 y=0
 
-while x <= (r-k+1):
+while x <= (r-k):
     y = 0
     
-    while y <= (s-k+1):
+    while y <= (s-k):
         row = x+1
         fly_cnt = 0
         while row < x+k-1:
