@@ -10,7 +10,7 @@ tran['8'] = '7'
 tran['9'] = '8'
 tran['0'] = '9'
 tran['-'] = '0'
-tran['+'] = '='
+tran['='] = '-'
 tran['W'] = 'Q'
 tran['E'] = 'W'
 tran['R'] = 'E'
@@ -44,7 +44,8 @@ tran['.'] = ','
 tran['/'] = '.'
 tran[' '] = ' '
 
-input_line = input()
-for x in input_line:
-    print(tran[x], end='')
-print('')
+while 1:
+    input_line = input()
+    for x in input_line:
+        print(tran[x], end='')
+    print('')
