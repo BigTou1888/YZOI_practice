@@ -15,25 +15,30 @@ def getNext(input_string, str_len):
         else:
             k = result[k]
     return result
-
-
-def trace_next(next, len):
-    repeat_len = next[len]
-    if repeat_len != 0:
-        len = repeat_len
-        trace_next(next, len)
-        print(repeat_len, end=' ')
-    else:
-        return
     
 
 
-while 1:
 
+
+i=0
+result = []
+while 1:
+    n = int(input())
+    if n ==0:
+        break
     input_line = input()
     input_len = len(input_line)
 
     next = getNext(input_line, input_len)
-    trace_next(next, input_len)
-    print(input_len)
     
+    if i != 0:
+        print('')
+    print("Test case #%d" % (i+1))
+
+    j = 2
+    while j <= n:
+        repeat_len = j -next[j]
+        if (j %repeat_len == 0) & ((int(j/repeat_len))!=1):
+            print (j, int(j/repeat_len))
+        j = j+1
+    i = i+1
