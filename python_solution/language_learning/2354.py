@@ -1,3 +1,56 @@
+def update_cnt(cnt, cur_letter, stride, direction):
+    if stride < 26:
+        j = 0
+        while j < stride:
+            cnt[cur_letter] +=1
+            if inc :
+                if cur_letter == 25:
+                    cur_letter = 0
+                else:
+                    cur_letter +=1
+            else:
+                if cur_letter == 0:
+                    cur_letter = 25
+                else:
+                    cur_letter -=1
+                
+            j +=1
+    else:
+        j = 0
+        low = int(stride/26)
+        high_num = stride %26
+        high = low
+        if high_num != 0:
+            high += 1
+        while j < high_num:
+            cnt[cur_letter] += high
+            if inc :
+                if cur_letter == 25:
+                    cur_letter = 0
+                else:
+                    cur_letter +=1
+            else:
+                if cur_letter == 0:
+                    cur_letter = 25
+                else:
+                    cur_letter -=1
+                
+            
+            j+=1
+        while j < 26:
+            cnt[cur_letter] += low
+            if inc :
+                if cur_letter == 25:
+                    cur_letter = 0
+                else:
+                    cur_letter +=1
+            else:
+                if cur_letter == 0:
+                    cur_letter = 25
+                else:
+                    cur_letter -=1           
+            j+=1     
+    return cnt      
 n = int(input())
 i = 0
 inc = 1
@@ -12,59 +65,30 @@ while i<26:
 i = 0
 while i < n:
     command = input().split()
+    
+    target = int(command[1])
+    stride = target - total
+    cnt = update_cnt(cnt,  cur_letter, stride, inc)
+    total = target
+    if inc:
+        cur_letter += stride
+        cur_letter = cur_letter%26;
+    else:
+        cur_letter = 26+cur_letter - (stride%26)
+        cur_letter = cur_letter%26
+    
     if command[0] == 'UPIT':
-        target = int(command[1])
-
-        while total < target:
-            cnt[cur_letter] +=1
-            if inc:
-                if cur_letter == 25:
-                    cur_letter = 0
-                else:
-                    cur_letter +=1
-            else:
-                if cur_letter == 0:
-                    cur_letter = 25
-                else:
-                    cur_letter -=1
-
-            
-            total +=1
-
         index = ord(command[2]) - ord('a')
         print(cnt[index])
     elif command[0] == 'SMJER':
-        target = int(command[1])
-        while total < target:
-            cnt[cur_letter] +=1
-            if inc:
-                if cur_letter == 25:
-                    cur_letter = 0
-                else:
-                    cur_letter +=1
-            else:
-                if cur_letter == 0:
-                    cur_letter = 25
-                else:
-                    cur_letter -=1
-
-            total +=1
         if inc:
             inc = 0
-            if cur_letter == 0:
-                cur_letter = 24
-            elif cur_letter == 1:
-                cur_letter = 25
-            else:
-                cur_letter -=2
+            cur_letter  = 26+cur_letter-2
+            cur_letter = cur_letter%26
         else:
             inc = 1
-            if cur_letter == 24:
-                cur_letter = 0
-            elif cur_letter == 25:
-                cur_letter = 1
-            else:
-                cur_letter +=2
+            cur_letter += 2
+            cur_letter = cur_letter%26
+        
 
-    
     i = i+1
