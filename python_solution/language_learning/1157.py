@@ -44,8 +44,11 @@ tran['.'] = ','
 tran['/'] = '.'
 tran[' '] = ' '
 
-while 1:
-    input_line = input()
-    for x in input_line:
+
+input_line = input()
+for x in input_line:
+    if x in tran:
         print(tran[x], end='')
-    print('')
+    else:
+        print(x, end='')
+print('')
