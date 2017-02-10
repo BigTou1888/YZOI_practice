@@ -1,4 +1,7 @@
-def op_analyze(command):
+def op_analyze(command, cur_pri, start): # 0:)(, 1:(), 2:*, 3:^, 4:+
+    if cur_pri == 0:
+        while start < len(command):
+            
     
 
 
