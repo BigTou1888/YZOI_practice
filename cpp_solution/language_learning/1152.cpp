@@ -2,60 +2,121 @@
 #include<iostream>
 
 
-char a[200];
+char a[500];
+char cur[500];
+int next[500];
+int length=1;
+int cur_digit_pos = 1;
+
+void getNext(char input_string[], int result[], int str_len) {
+    result[0] = -1;
+    int j = 0;
+    int k = -1;
+    while (j < str_len) {
+        if (k == -1){
+            k++;
+            j++;
+            result[j] = k;
+        } else if (input_string[j] == input_string[k]) {
+            k++;
+            j++;
+            result[j] = k;
+        } else {
+            k = result[k];
+        }
+    }
+}
+
+void digit_update(){
+  int carry = 0;
+  int add = 1;
+  for (int i = 0; i < length; i++) {
+	  cur[i] += carry+add;
+	  if ((cur[i] - '0') >=10) {
+		  cur[i] = ((cur[i]-'0')%10) + '0';
+		  carry = 1;
+	  } else {
+		  carry = 0;
+	  }
+	  add = 0;
+  }
+  if (carry ) {
+
+	  length++;
+	  cur[length-1] = '1';
+  }
+
+  cur_digit_pos = 1;
+
+}
+
+char cur_update () {
+
+  if (cur_digit_pos == length) {
+    digit_update();
+  } else {
+	  cur_digit_pos++;
+  }
+  char tmp = cur[length-cur_digit_pos];
+  return tmp;
+}
+
+
+int kmp_match(char match_str[], char sample_str[], int m_len, int s_len) {
+    int m = 0;
+    int s = 0;
+    int result = 0;
+
+    while (m < m_len) {
+        if ((match_str[m] == sample_str[s]) | (s==-1)) {
+            s++;
+            m++;
+            if (s == s_len) {
+                result++;
+                s = next[s];
+            }
+
+        } else {
+            s = next[s];
+        }
+    }
+    return result;
+}
+
 
 int main() {
 	scanf("%s", a);
-	int k = 0;
+	int i = 0;
+    int a_len;
+    for (i = 0; a[i]; i++) ;
+    a_len = i;
+
+    for (i = 1; i<500; i++) cur[i] ='0';
+    cur[0] = '1';
+    getNext(a, next, a_len);
+
+	int total_pos = 0;
+	int com_pos = 0;
+	char cur_chr = '1';
+	while (1) {
 
 
-	int cur_value = 1;
-	int total_dig_num = 1;
+	  if ((  cur_chr == a[com_pos]) | (com_pos==-1)) {
+	    com_pos++;
+	    total_pos++;
+        cur_chr = cur_update();
 
-	int pos = 0;
-	int upper = 10;
-	int string_buf_len = 0;
-	string_buf = ''
-	while (1){
-		while (cur_value < upper) {
-	        int tmp_value = cur_value;
-			int cur_dig_num = 0;
-			int tmp_upper = upper;
-			while (cur_dig_num < total_dig_num) {
-	            int cur_digit = tmp_value / (tmp_upper/10);
-	            tmp_value = tmp_value - cur_digit*tmp_upper/10;
-	            cur_digit = chr(cur_digit+ord('0'))
-			}
+
+
+	    if (com_pos == a_len) {
+		  printf("%d\n", (total_pos-a_len+1));
+		  break;
 		}
-	}
+
+	  } else {
+		com_pos = next[com_pos];
+	  }
+    }
 }
 
-while 1:
-    while cur_value < upper:
-        tmp_value = cur_value
-        cur_dig_num = 0
-        tmp_upper = upper
-        while cur_dig_num < total_dig_num:
-            cur_digit = int(tmp_value / (tmp_upper/10))
-            tmp_value = tmp_value - int(cur_digit*tmp_upper/10)
-            cur_digit = chr(cur_digit+ord('0'))
 
-            if string_buf_len == len(a) :
-                string_buf = string_buf[1:]
-                string_buf = string_buf + cur_digit
-                if string_buf == a:
-                    print(pos - len(a) +1 +1)
-                    exit(0)
-            else:
-                string_buf = string_buf + cur_digit
-                string_buf_len = string_buf_len+1
-                if string_buf_len == len(a):
-                    if string_buf == a:
-                        print(pos - len(a) +1 +1)
-                        exit(0)
-            cur_dig_num = cur_dig_num +1
-            pos = pos+1
-            tmp_upper = int(tmp_upper/10)
-        cur_value = cur_value + 1
-    upper = upper*10
-    total_dig_num = total_dig_num+1
