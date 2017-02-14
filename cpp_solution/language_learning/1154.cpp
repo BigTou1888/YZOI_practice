@@ -2,8 +2,8 @@
 #include<string>
 #include <iostream>
 using namespace std;
-char com[12000];
-//string com;
+//char com[12000];
+string com;
 int com_index=0;
 int length=0;
 int cr=0;
@@ -19,49 +19,25 @@ void parse(int type) { // 0: normal, 1: equal, 2: comment
 
     char c;
   c=com[com_index];
-  while (c) {
+  while (com_index <= length) {
     if (finish) return;
-    //if (com_index >= length)  return;
+    if (com_index >= length)  return;
     c=com[com_index];
     com_index++;
     if (c == '\n'){
-      if (cr==1) {
-        cr = 0;
-        continue;
-      } else {
-        finish=1;
-        cr = 0;
-        return ;
-      }
-
-    } else {
-      cr = 0;
-      if (c=='\r') {
-          //gets(com);
-          //length = com.size();
-          //com_index = 0;
-/*
-          getline(cin, com, '\n');
-          length = com.size();
-          com_index = 0;
-          continue;
-        if (com_index == (length-1)){
-          getline(cin, com, '\n');
-          length = com.size();
-          com_index = 0;
-          open_bracket_line = 0;
-          open_comment_bracket_line = 0;
-          continue;
-        }
-        cr = 1;
-        open_bracket = open_bracket-open_bracket_line;
-        open_comment_bracket = open_comment_bracket-open_comment_bracket_line;
-
-        open_bracket_line = 0;
-        open_comment_bracket_line = 0;
-        continue;
-*/
+      finish=1;
       return;
+    } else {
+      if (c=='\r') {
+    	  if(com_index == (length-1)) {
+            finish=1;
+            return;
+    	  } else {
+    		  open_bracket -=open_bracket_line;
+    		  open_comment_bracket-=open_comment_bracket_line;
+    		  open_bracket_line = 0;
+    		  open_comment_bracket_line = 0;
+    	  }
       } else {
         if (type == 0) {
           if (c==')') {
@@ -120,7 +96,6 @@ void parse(int type) { // 0: normal, 1: equal, 2: comment
         }
       }
     }
-    c=com[com_index];
   }
   
 }
@@ -129,10 +104,24 @@ void parse(int type) { // 0: normal, 1: equal, 2: comment
 int main () {
 
   //getline(cin, com, '\n');
-  while (gets(com)){
+  while (getline(cin, com)) {
   //gets(com);
-    com_index = 0;
-    parse(0);
+	finish=0;
+    length=com.size();
+	com_index = 0;
+	if (open_comment_bracket !=0) {
+		parse(2);
+	} else if (open_bracket!=0) {
+		parse(1);
+	} else {
+		parse(0);
+	}
+	/*
+	  if (fail | (open_comment_bracket !=0) | (open_bracket!=0))
+	    printf("NO\n");
+	  else
+	    printf("YES\n");
+  */
   }
   if (fail | (open_comment_bracket !=0) | (open_bracket!=0))
     printf("NO\n");
