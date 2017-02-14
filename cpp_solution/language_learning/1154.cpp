@@ -73,7 +73,7 @@ void parse(int type) { // 0: normal, 1: equal, 2: comment
             open_bracket--;
             open_bracket_line--;
             return;
-          } else if ((c>='0' & c<='9') | c=='+' | c=='-' | c=='*' | c=='/' | c=='=' | c=='\r') {
+          } else if (((c>='0') & (c<='9')) | (c=='+') | (c=='-') | (c=='*') | (c=='/') | (c=='=')) {
             continue;
           } else {
             fail = 1;
@@ -116,12 +116,12 @@ int main () {
 	} else {
 		parse(0);
 	}
-	/*
+
 	  if (fail | (open_comment_bracket !=0) | (open_bracket!=0))
 	    printf("NO\n");
 	  else
 	    printf("YES\n");
-  */
+
   }
   if (fail | (open_comment_bracket !=0) | (open_bracket!=0))
     printf("NO\n");
